@@ -1,0 +1,70 @@
+{% for c in content %}
+{% if "img" in c %}
+<section class="section--center mdl-grid mdl-shadow--4dp">
+    <header class="mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+        <figure>
+            {% if "links" in c %}<a href="{{ c["links"][0]["url"] }}">{% endif %}
+            <img src="{{ c["img"] }}" width="100%">
+            {% if "links" in c %}</a>{% endif %}
+        </figure>
+    </header>
+    <div class="mdl-card mdl-cell mdl-cell--8-col">
+        <div class="mdl-card__supporting-text">
+            <h4>{{ c["title"] }} </h4>
+            <div id="textbox"> 
+                <p class="role">{{ c["role"] }}</p>
+                <p class="date">{{ c["date"] }}</p>
+            </div>
+            <div style="clear: both;"></div>
+            <div>
+                <ul class="myList">
+                {% for note in c["points"] %}
+                    <li>
+                        {{ note }}
+                    </li>
+                  {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% if "links" in c %}
+            <div class="mdl-card__actions">
+            {% for l in c["links"] %}
+                <a href="{{ l["url"] }}" class="mdl-button">{{ l["text"] }}</a>
+            {% endfor %}    
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% else %}
+<section class="section--center mdl-grid mdl-shadow--4dp">
+	<div class="mdl-card mdl-cell mdl-cell--12-col">
+        <div class="mdl-card__supporting-text">
+            <h4>{{ c["title"] }} </h4>
+        	<div id="textbox"> 
+        		<p class="role">{{ c["role"] }}</p>
+        		<p class="date">{{ c["date"] }}</p>
+        	</div>
+        	<div style="clear: both;"></div>
+        	<div>
+            	<ul class="myList">
+                {% for note in c["points"] %}
+			        <li>
+			            {{ note }}
+			        </li>
+			      {% endfor %}
+			    </ul>
+            </div>
+	    </div>
+	    {% if "links" in c %}
+            <div class="mdl-card__actions">
+            {% for l in c["links"] %}
+                <a href="{{ l["url"] }}" class="mdl-button">{{ l["text"] }}</a>
+            {% endfor %}    
+            </div>
+        {% endif %}
+	</div>
+</section>
+{% endif %}
+
+{% endfor %}

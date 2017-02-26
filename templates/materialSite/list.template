@@ -1,0 +1,15 @@
+<section class="section--center mdl-grid mdl-shadow--4dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__supporting-text">
+    <ul class="myList">
+      {% for c in content[0] %}
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            {{ c }}
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+{% set lb = '{' %}
+{% set rb = '}' %}
+
+{% for c in content %}
+		<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ c["title"].replace(" ", "") }}">
+								{{ c["title"] }}
+							</a>
+						</h4>
+					</div>
+					<div id="collapse-{{ c["title"].replace(" ", "") }}" class="panel-collapse collapse in">
+						<div class="panel-body projectsDescription">
+							<table class="myTable">
+								<tbody>
+									<tr>
+										<td class="leftTD"><b>{{ c["role"] }}</b></td>
+										<td class="rightTD"><b>{{ c["date"] }}</b></td>
+									</tr>
+
+									{% if "points" in c %}
+									<tr><td colspan="2">
+										{% for note in c["points"] %}
+										<ul>
+											<li>{{ note }}</li>
+										</ul>
+										{% endfor %}
+									</td></tr>
+									{% endif %}
+
+									{% if "links" in c %}
+									<tr><td colspan="2">
+										{% for link in c["links"] %}
+										<ul>
+											<li><a href={{link["url"]}}>{{link["text"]}}</a></li>
+										</ul>
+										{% endfor %}
+									</td></tr>
+									{% endif %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>{% endfor %}

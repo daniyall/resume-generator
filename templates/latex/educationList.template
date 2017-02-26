@@ -1,0 +1,7 @@
+{% set lb = '{' %}{% set rb = '}' %}
+\section{{lb}}{{ title }}{{rb}}{% for c in content %}
+		\cvitem{{lb}}{{ c["date"] }}{{rb}}{{lb}}\textbf{{lb}}{{ c["degree"] }}{{rb}}, {{ c["school"] }}
+		{% if "points" in c %}	\begin{itemize}{% endif %}
+		{% for note in c["points"] %}		\item {{ note }}{% endfor %}
+		{% if "points" in c %}	\end{itemize}{% endif %}{{rb}}	
+		{% endfor %}

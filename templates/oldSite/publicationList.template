@@ -1,0 +1,9 @@
+{% set lb = '{' %}
+{% set rb = '}' %}
+
+<div class="panel projectsDescription">
+{% for c in content %}
+		<ul class="pubList">
+				<li>{{ htmlBold(c["authors"]) }}, <i>"{{ c["title"] }}"</i>, {{ c["conference"] }}, {{ c["date"] }}
+				</ul>{% endfor %}
+</div>

@@ -1,0 +1,117 @@
+{
+    "info": {
+        "firstName": "John",
+        "lastName": "Smith",
+        "email": "email@email.com",
+        "cell": "555-555-5555",
+        "site": "www.google.com",
+        "position": "Made up person",
+        "address_l1": "742 Evergreen Terrace",
+        "address_l2": "Springfield",
+        "title": "Curriculum Vitae"
+    },
+
+    "education": {
+        "PhD": {
+            "date": "Sep 2014 - Present",
+            "degree": "PhD Computing Science",
+            "school": "Some university",
+            "points": [
+                "Did research"
+            ]
+        },
+        "BSc": {
+            "date": "Sep 2011 - Jun 2014",
+            "degree": "BSc Computing Science",
+            "school": "Simon Fraser University",
+            "points": ["Took courses"],
+            "img": "https://upload.wikimedia.org/wikipedia/en/0/0b/Simon_Fraser_University_coat_of_arms.png"
+        }
+    },
+    "skills": {
+        "skills": [
+        "Good at MS Excel",
+        "Good at MS Word",
+        "Good at MS Powerpoint"
+        ]
+    },
+    "publications": {
+        "pub1": {
+            "authors": "Smith, J.",
+            "title": "Title",
+            "conference": "Conference",
+            "date": "April 2016",
+            "location": "USA",
+            "links": [
+                {
+                    "text": "Paper",
+                    "url": "http://dl.acm.org"
+                }
+            ]
+        }
+    },
+
+    "posters": {
+        "poster1": {
+            "authors": "Smith, J.",
+            "title": "Title",
+            "conference": "Conference",
+            "date": "June 2016",
+            "location": "Singapore",
+            "links": [
+                {
+                    "text": "Poster",
+                    "url": "http://dl.acm.org"
+                }
+            ]
+        }
+    },
+
+
+    "work-experience": {
+        "Job1": {
+            "date": "Sep 2014 - Present",
+            "title": "Dunder Mifflin",
+            "role": "Assistant to the regional manager",
+            "points": [
+                "Bears, beets, battle star galactica"
+            ]
+        }
+    },
+    "projects": {
+        "firedrill": {
+            "date": "Sep 2016 - Dec 2016",
+            "title": "Ran a fire drill",
+            "role": "Chief Drill Runner",
+            "points": [
+                "Simulated an emergency situation to test preparedness of office"
+            ],
+            "links": [
+                {
+                    "text": "Video",
+                    "url": "www.youtube.com"
+                },
+                {
+                    "text": "Report",
+                    "url": "www.google.com"
+                }
+            ]
+        }
+    },
+    "volunteer": {
+        "deputy": {
+            "date": "September 2013",
+            "title": "Sheriffs Deputy",
+            "role": "Volunteer",
+            "points": [
+                "Did stuff"
+            ]
+        }
+    },
+    "achievements": {
+        "achievements": [
+            "Top salesman",
+            "Managed store opening in Florida"
+        ]
+    }
+}

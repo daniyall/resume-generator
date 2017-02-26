@@ -1,0 +1,8 @@
+{% set lb = '{' %}{% set rb = '}' %}
+{% if 'firstName' in info %} \firstname{{lb}}{{ info.firstName }}{{rb}}  {% endif %}
+{% if 'lastName' in info %} \familyname{{lb}}{{ info.lastName }}{{rb}}  {% endif %}
+{% if 'title' in info %} \title{{lb}}{{ info.title }}{{rb}}  {% endif %}
+{% if 'email' in info %} \email{{lb}}{{ info.email }}{{rb}}  {% endif %}
+{% if 'site' in info %} \homepage{{lb}}{{ info.siteURL }}{{rb}}{{lb}}{{ info.siteName }}{{rb}} {% endif %}
+{% if 'address_l1' in info %} \address{{lb}}{{ info.address_l1 }}{{rb}} {{lb}}{{ info.address_l2 }} {{rb}}    {% endif %}
+{% if 'cell' in info %} \phone{{lb}}{{ info.cell }}{{rb}} {% endif %}

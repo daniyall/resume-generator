@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width; initial-scale=1.0"> -->
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>{{ fullName }}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom Theme CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">    
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom" style="overflow-x:hidden;">
+
+    <nav class="navbar navbar-custom navbar-fixed-top page-scroll" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">{{ fullName }}</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+
+                    {% for section in sections %}
+						<li class="page-scroll">
+                        	<a href="#{{ section["title"].replace(" ", "") }}">{{ section["title"] }}</a>
+                    	</li>
+					{% endfor %}
+                    
+                    <li class="page-scroll">
+                        <a href="#resume">CV</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <section class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">{{ fullName }}</h1>
+                        <p class="intro-text">{{ position }}</p>
+                        <div class="page-scroll">
+                            <a href="#{{ sections[0]["title"].replace(" ", "") }}" class="btn btn-circle">
+                                <i class="fa fa-angle-double-down animated"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% set sectionCount = 1 %}
+    {% for section in sections %}
+    
+    <section id="{{ section["title"].replace(" ", "") }}" class="content-section text-center section{{sectionCount}}">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>{{ section["title"] }}</h2>
+
+                {{ section["content"] }}
+            </div>
+        </div>
+    </section>
+
+    {% if sectionCount == 1 %}
+    	{% set sectionCount = 2 %}
+    {% else %}
+    	{% set sectionCount = 1 %}
+    {% endif %}
+    {% endfor %}
+
+    {% if sectionCount == 1 %}
+        {% set sectionCount = 2 %}
+    {% else %}
+        {% set sectionCount = 1 %}
+    {% endif %}
+    <section id="resume" class="content-section text-center section{{sectionCount}}">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Résumé</h2>
+                <a class="btn btn-default resume-btn" href="DLiaqat-CV.pdf">Download Résumé</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core JavaScript Files -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+
+</body>
+
+</html>

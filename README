@@ -1,0 +1,26 @@
+Must have latex installed
+
+For first time running:
+    install virtualenv
+        sudo pip install virtualenv
+
+    create virtual environment
+        virtualenv .venv
+
+
+To activate virtual environment:
+    source .venv/bin/activate
+
+To install requirements:
+    pip install -r requirements.txt
+
+To deactivate virtual environment:
+    deactivate
+
+
+
+To generate resume use the makefile
+    ex. make pdf-full
+
+
+The latex template uses https://github.com/xdanaux/moderncv

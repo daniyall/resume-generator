@@ -1,0 +1,3 @@
+{% set lb = '{' %}{% set rb = '}' %}
+\section{{lb}}{{ title }}{{rb}}{% for c in content[0] %}
+		\cvlistitem{{lb}}{{ c }}{{rb}}{% endfor %}

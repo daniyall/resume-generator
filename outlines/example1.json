@@ -1,0 +1,69 @@
+{
+    "order": [
+        "education", 
+        "skills",
+        "publications",
+        "posters",
+        "projects",
+        "achievements"
+    ],
+
+    "content": [
+        {
+            "key": "info",
+            "title": "info",
+            "template": "info.template",
+            "include": "*"
+        },
+        {
+            "key": "education",
+            "title": "Education",
+            "template": "educationList.template",
+            "include": "*"
+        },
+        {
+            "key": "skills",
+            "title": "Skills",
+            "template": "list.template",
+            "include": "*"
+        },
+        {
+            "key": "publications",
+            "title": "Publications",
+            "template": "publicationList.template",
+            "include": "*"
+        },
+        {
+            "key": "posters",
+            "title": "Posters",
+            "template": "publicationList.template",
+            "include": "*"
+        },
+        {
+            "key": "work-experience",
+            "title": "Work Experience",
+            "template": "dateList.template",
+            "include": "*"
+        },
+        {
+            "key": "projects",
+            "title": "Projects",
+            "template": "dateList.template",
+            "include": [
+                "firedrill"
+            ]
+        },
+        {
+            "key": "volunteer",
+            "title": "Volunteer Work",
+            "template": "dateList.template",
+            "include": "*"
+        },
+        {
+            "key": "achievements",
+            "title": "Academic Achievements and Awards",
+            "template": "list.template",
+            "include": "*"
+        }
+    ]
+}

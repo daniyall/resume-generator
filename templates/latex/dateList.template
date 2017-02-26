@@ -1,0 +1,10 @@
+{% set lb = '{' %}{% set rb = '}' %}
+\section{{lb}}{{ title }}{{rb}}{% for c in content %}
+	\cvitem{{lb}}{{ c["date"] }}{{rb}}{{lb}}
+	\textbf{{lb}}{{ c["title"] }}{{rb}} \hfill \textsc{{lb}}{{ c["role"] }}{{rb}}
+	{% if "points" in c %}	\begin{itemize}{% endif %}{% for note in c["points"] %}
+		\item {{ note }}{% endfor %}
+	{% if "points" in c %}	\end{itemize}{% endif %}
+	{% if "links" in c %}	\begin{itemize}{% endif %}{% for link in c["links"] %}
+		\item \href{{lb}}{{ link["url"] }}{{rb}}{{lb}} {{ link["text"] }} {{rb}}{% endfor %}{% if "links" in c %}	\end{itemize}{% endif %}{{rb}}
+		{% endfor %}

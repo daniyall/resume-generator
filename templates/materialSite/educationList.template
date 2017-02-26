@@ -1,0 +1,29 @@
+{% for c in content %}
+<section class="section--center mdl-grid mdl-shadow--4dp">
+    <header class="mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone">
+        <figure>
+            <img src="{{ c["img"] }}" width="100%">
+        </figure>
+    </header>
+
+    <div class="mdl-card mdl-cell mdl-cell--8-col">
+        <div class="mdl-card__supporting-text">
+            <h4>{{ c["degree"]  }} </h4>
+                <div id="textbox"> 
+                    <p class="role">{{ c["school"] }}</p>
+                    <p class="date">{{ c["date"] }}</p>
+                </div>
+                <div style="clear: both;"></div>
+                <div>
+                <ul class="myList">
+                {% for note in c["points"] %}
+                    <li>
+                        {{ note }}
+                    </li>
+                  {% endfor %}
+                </ul>
+                </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
