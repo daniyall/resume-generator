@@ -24,3 +24,5 @@ To generate resume use the makefile
 
 
 The latex template uses https://github.com/xdanaux/moderncv
+
+For an example, checkout www.cs.toronto.edu/~dliaqat
