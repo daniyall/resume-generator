@@ -111,6 +111,23 @@ def genInfo(resume, j2Env, sanitizer):
 
 	return infoTemplate.render(info=info)
 
+def insertHtmlLinks(generated, text, link):
+	return generated.replace(text, """<a href="%s">%s</a>""" % (link, text))
+
+def insertLatexLinks(generated, text, link):
+	return generated.replace(text, "\\href{%s}{%s}" % (link, text))
+
+def insertLinks(generated, linker):
+	linkInfo = loadJSON("links.json")
+
+	for l in linkInfo:
+		text = l["text"]
+		link = l["link"]
+		generated = linker(generated, text, link)
+
+	return generated
+
+
 def genSections(resume, j2Env, sanitizer, sectionsList):
 	generated = []
 
@@ -153,7 +170,7 @@ def genResume(resume, j2Env, sanitizer, sectionsList):
 
 	return generated.render(info=info, sections=sections)
 
-def applyTemplate(genType, resume, sectionsList, templateName):
+def applyTemplate(genType, resume, sectionsList, templateName, shouldInsertLinks):
 	global uname, fullName
 
 	templateDir = os.path.join(templateDirBase, templateName)
@@ -175,15 +192,19 @@ def applyTemplate(genType, resume, sectionsList, templateName):
 		outfileName = latexFileName
 		build = buildLatex
 		prettifyer = latexPrettify
+		linker = insertLatexLinks
 	elif "html" in genType:
 		sanitizer = htmlSanitizer
 		outfileName = htmlFileName
 		build = buildHTML
 		prettifyer = htmlPrettify
+		linker = insertHtmlLinks
 	else:
 		return
 
 	generated = genResume(resume, j2Env, sanitizer, sectionsList)
+	if shouldInsertLinks:
+		generated = insertLinks(generated, linker)
 	generated = prettifyer(generated)
 
 	outfile = os.path.join(outputDir, outfileName)
@@ -222,7 +243,7 @@ def applyOutline(outline, resume):
 
 	return filteredResume
 
-def main(genType, outline, resume, template):
+def main(genType, outline, resume, template, insertLinks):
 	outline = loadJSON(outline)
 	sectionsOrder = outline["order"]
 	sectionsContent = outline["content"]
@@ -238,7 +259,7 @@ def main(genType, outline, resume, template):
 				sectionsList.append((content["title"], content["template"]))
 				break
 
-	applyTemplate(genType, filteredResume, sectionsList, template)
+	applyTemplate(genType, filteredResume, sectionsList, template, insertLinks)
 
 @click.group()
 def generate():
@@ -248,15 +269,17 @@ def generate():
 @click.option('--outline', default="htmlOutline.json", help='Outline file to use when generating html')
 @click.option('--resume', default="resume.json", help='Resume file')
 @click.option('--template', default="material", help='Template File to use')
-def html(outline, resume, template):
-	main("html", outline, resume, template)
+@click.option('--links', default=True, help='Insert links', is_flag=True)
+def html(outline, resume, template, links):
+	main("html", outline, resume, template, links)
 
 @generate.command()
 @click.option('--outline', default="pdfOutline.json", help='Outline file to use when generating pdf')
 @click.option('--resume', default="resume.json", help='Resume file')
 @click.option('--template', default="latex", help='Template File to use')
-def pdf(outline, resume, template):
-	main("latex", outline, resume, template)
+@click.option('--links', default=False, help='Insert links', is_flag=True)
+def pdf(outline, resume, template, links):
+	main("latex", outline, resume, template, links)
 	
 
 cli = click.CommandCollection(sources=[generate])
