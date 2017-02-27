@@ -347,22 +347,5 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
   </script>
-  <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-82335386-1', 'auto');
-    ga('send', 'pageview');
-
-    $(".mdl-layout__tab").bind( "mouseup", function(e) {
-      ga('send', 'event', "tab", "click", $( this ).text().trim(), e.which);
-    });
-
-    $(".mdl-layout__content a").bind( "mouseup", function(e) {
-      ga('send', 'event', "link", "click", ($( ".mdl-layout__header .mdl-layout__tab.is-active" ).text() + " " +  $( this ).attr('href')).trim(), e.which);
-    });
-  </script>
  </body>
 </html>
