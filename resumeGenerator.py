@@ -186,6 +186,7 @@ def applyTemplate(genType, resume, sectionsList, templateName, shouldInsertLinks
 
 	j2Env.globals['fullName'] = fullName
 	j2Env.globals['position'] = position
+	j2Env.globals['pdfFile'] = uname + "-" + shortTitle + ".pdf"
 	
 	if genType == "latex":
 		sanitizer = latexSanitizer

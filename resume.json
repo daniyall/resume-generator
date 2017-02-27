@@ -1,67 +1,44 @@
 {
     "info": {
-        "firstName": "John",
-        "lastName": "Smith",
-        "email": "email@email.com",
-        "cell": "555-555-5555",
+        "firstName": "Dwight",
+        "lastName": "Schrute",
+        "email": "dschrute@schrutefarms.com",
+        "cell": "570-555-1212",
         "site": "www.google.com",
-        "position": "Made up person",
-        "address_l1": "742 Evergreen Terrace",
-        "address_l2": "Springfield",
+        "position": "Star Paper Salesman",
+        "address_l1": "Main Street",
+        "address_l2": "Honessdale, PA, 18431",
         "title": "Curriculum Vitae"
     },
 
     "education": {
-        "PhD": {
-            "date": "Sep 2014 - Present",
-            "degree": "PhD Computing Science",
-            "school": "Some university",
+        "bsc": {
+            "date": "Sep 2000 - Sep 2004",
+            "degree": "Bachelor's Degree, Business Administration",
+            "school": "Scranton University",
             "points": [
-                "Did research"
+                "Excellent GPA"
             ]
-        },
-        "BSc": {
-            "date": "Sep 2011 - Jun 2014",
-            "degree": "BSc Computing Science",
-            "school": "Simon Fraser University",
-            "points": ["Took courses"],
-            "img": "https://upload.wikimedia.org/wikipedia/en/0/0b/Simon_Fraser_University_coat_of_arms.png"
         }
     },
     "skills": {
         "skills": [
-        "Good at MS Excel",
-        "Good at MS Word",
-        "Good at MS Powerpoint"
+        "Goju Karate",
+        "Table Making",
+        "Werewolf hunting"
         ]
     },
     "publications": {
         "pub1": {
-            "authors": "Smith, J.",
-            "title": "Title",
+            "authors": "Schrute, D.K.",
+            "title": "Blood alone moves the wheel of history",
             "conference": "Conference",
-            "date": "April 2016",
-            "location": "USA",
+            "date": "March 2006",
+            "location": "NBC",
             "links": [
                 {
-                    "text": "Paper",
-                    "url": "http://dl.acm.org"
-                }
-            ]
-        }
-    },
-
-    "posters": {
-        "poster1": {
-            "authors": "Smith, J.",
-            "title": "Title",
-            "conference": "Conference",
-            "date": "June 2016",
-            "location": "Singapore",
-            "links": [
-                {
-                    "text": "Poster",
-                    "url": "http://dl.acm.org"
+                    "text": "Video",
+                    "url": "http://www.youtube.com"
                 }
             ]
         }
@@ -70,12 +47,20 @@
 
     "work-experience": {
         "Job1": {
-            "date": "Sep 2014 - Present",
+            "date": "2005 - 2013",
             "title": "Dunder Mifflin",
-            "role": "Assistant to the regional manager",
+            "role": "Assistant (to the) regional manager",
             "points": [
-                "Bears, beets, battle star galactica",
                 "Worked for Michael Scott"
+            ],
+            "img": "https://ih0.redbubble.net/image.191793147.8030/flat,800x800,075,f.u1.jpg"
+        },
+        "Job2": {
+            "date": "1980 - Present",
+            "title": "Schrute Farms",
+            "role": "Beet Farmer and Bed and Breakfast owner",
+            "points": [
+                "Farm beets with Mose"
             ]
         }
     },
@@ -102,7 +87,7 @@
     "volunteer": {
         "deputy": {
             "date": "September 2013",
-            "title": "Sheriffs Deputy",
+            "title": "Retired Lackawanna county volunteer Sheriffs Deputy",
             "role": "Volunteer",
             "points": [
                 "Did stuff"

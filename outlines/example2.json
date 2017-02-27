@@ -2,8 +2,7 @@
     "order": [
         "education", 
         "projects",
-        "publications",
-        "posters"
+        "publications"
     ],
 
     "content": [
@@ -33,12 +32,6 @@
         {
             "key": "publications",
             "title": "Publications",
-            "template": "publicationList.template",
-            "include": "*"
-        },
-        {
-            "key": "posters",
-            "title": "Posters",
             "template": "publicationList.template",
             "include": "*"
         },
