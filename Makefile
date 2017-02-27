@@ -10,5 +10,3 @@ pdf-example2:
 html:
 	python resumeGenerator.py html --outline outlines/everything.json --template materialSite
 
-html-old:
-	python resumeGenerator.py html --outline outlines/example2.json --template oldSite

@@ -1,7 +1,0 @@
-{% set lb = '{' %}
-{% set rb = '}' %}
-
-{% for c in content[0] %}
-		<ul class="myList">
-					<li>{{ c }}</li>
-				</ul>{% endfor %}
