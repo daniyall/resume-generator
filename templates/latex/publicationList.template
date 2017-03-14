@@ -1,4 +1,4 @@
 {% set lb = '{' %}{% set rb = '}' %}
 \section{{lb}}{{ title }}{{rb}}{% for c in content %}
-		\cvlistitem{{lb}}{{ latexBold(c["authors"]) }}, {% if "links" in c %}\href{{lb}}{{ c["links"][0]["url"] }}{{rb}}{{lb}}{% endif %}\textit{{lb}}``{{ c["title"] }}''}{% if "links" in c %}{{rb}}{% endif %}, {{ c["conference"] }}, {{ c["date"] }}
+		\cvlistitem{{lb}}{{ c["authors"] }}, {% if "links" in c %}\href{{lb}}{{ c["links"][0]["url"] }}{{rb}}{{lb}}{% endif %}\textit{{lb}}``{{ c["title"] }}''}{% if "links" in c %}{{rb}}{% endif %}, {{ c["conference"] }}, {{ c["date"] }}
 		{{rb}}{% endfor %}

@@ -46,12 +46,6 @@ def htmlSanitizer(value):
 	
 	return cleanedValue
 
-def latexBold(text):
-	return text.replace(fullName, "\\textbf{" + fullName + "}")
-
-def htmlBold(text):
-	return text.replace(fullName, "<b>" + fullName + "</b>")
-
 def buildLatex(outputdir, outfileName):
 	curPath = os.getcwd()
 	os.chdir(outputdir)
@@ -91,7 +85,7 @@ def writeFile(fname, data):
 			f.write(data)
 
 def htmlPrettify(html):
-	soup=bs(html)
+	soup = bs(html)
 
 	return soup.prettify()
 
@@ -111,19 +105,18 @@ def genInfo(resume, j2Env, sanitizer):
 
 	return infoTemplate.render(info=info)
 
-def insertHtmlLinks(generated, text, link):
-	return generated.replace(text, """<a href="%s">%s</a>""" % (link, text))
+def bold(generated, targetText, j2Env):
+	boldTemplate = j2Env.get_template("bold.template")
+	return generated.replace(targetText, boldTemplate.render(text=targetText))
 
-def insertLatexLinks(generated, text, link):
-	return generated.replace(text, "\\href{%s}{%s}" % (link, text))
-
-def insertLinks(generated, linker):
+def insertLinks(generated, j2Env):
 	linkInfo = loadJSON("links.json")
+	linkTemplate = j2Env.get_template("url.template")
 
 	for l in linkInfo:
 		text = l["text"]
 		link = l["link"]
-		generated = linker(generated, text, link)
+		generated = generated.replace(text, linkTemplate.render(link=link, text=text))
 
 	return generated
 
@@ -157,6 +150,7 @@ def genSections(resume, j2Env, sanitizer, sectionsList):
 						item[key] = sanitizer(item[key])
 
 		genSection = template.render(title=title, content=content)
+		genSection = bold(genSection, fullName, j2Env)
 		
 		generated.append({"title": title, "content": genSection})
 
@@ -177,8 +171,6 @@ def applyTemplate(genType, resume, sectionsList, templateName, shouldInsertLinks
 	outputDir = os.path.join(outputDirBase, templateName)
 
 	j2Env = Environment(loader=FileSystemLoader(templateDir))
-	j2Env.globals['latexBold'] = latexBold
-	j2Env.globals['htmlBold'] = htmlBold
 
 	fullName = resume["info"]["firstName"] + " " + resume["info"]["lastName"];
 	uname = resume["info"]["firstName"][0] + resume["info"]["lastName"];
@@ -186,26 +178,25 @@ def applyTemplate(genType, resume, sectionsList, templateName, shouldInsertLinks
 
 	j2Env.globals['fullName'] = fullName
 	j2Env.globals['position'] = position
-	j2Env.globals['pdfFile'] = uname + "-" + shortTitle + ".pdf"
 	
 	if genType == "latex":
 		sanitizer = latexSanitizer
 		outfileName = latexFileName
 		build = buildLatex
 		prettifyer = latexPrettify
-		linker = insertLatexLinks
 	elif "html" in genType:
 		sanitizer = htmlSanitizer
 		outfileName = htmlFileName
 		build = buildHTML
 		prettifyer = htmlPrettify
-		linker = insertHtmlLinks
 	else:
 		return
 
 	generated = genResume(resume, j2Env, sanitizer, sectionsList)
+
 	if shouldInsertLinks:
-		generated = insertLinks(generated, linker)
+		generated = insertLinks(generated, j2Env)
+
 	generated = prettifyer(generated)
 
 	outfile = os.path.join(outputDir, outfileName)

@@ -1,0 +1,2 @@
+{% set lb = '{' %}{% set rb = '}' %}
+\textbf{{lb}}{{ text }}{{rb}}

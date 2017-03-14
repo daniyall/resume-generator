@@ -1,0 +1,2 @@
+{% set lb = '{' %}{% set rb = '}' %}
+\href{{lb}}{{ link }}{{rb}}{{lb}}{{text}}{{rb}}

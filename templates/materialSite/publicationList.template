@@ -11,7 +11,7 @@
         <div class="mdl-card mdl-cell mdl-cell--8-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
             <div class="mdl-card__supporting-text">
                 <h5>{{ c["title"] }}</h5>
-                <p>{{ htmlBold(c["authors"]) }}</p>
+                <p>{{ c["authors"] }}</p>
                 <p>{{ c["conference"] }}, {{ c["date"] }}</p>
             </div>
             {% if "links" in c %}
@@ -28,7 +28,7 @@
         <div class="mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone  my-grid">
             <div class="mdl-card__supporting-text">
                 <h5>{{ c["title"] }}</h5>
-                <p>{{ htmlBold(c["authors"]) }}</p>
+                <p>{{ c["authors"] }}</p>
                 <p>{{ c["conference"] }}, {{ c["date"] }}</p>
             </div>
             {% if "links" in c %}
