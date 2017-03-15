@@ -46,6 +46,9 @@ def htmlSanitizer(value):
 	
 	return cleanedValue
 
+def getPdfName():
+	return uname + "-" + shortTitle + ".pdf"
+
 def buildLatex(outputdir, outfileName):
 	curPath = os.getcwd()
 	os.chdir(outputdir)
@@ -65,7 +68,7 @@ def buildLatex(outputdir, outfileName):
 
 	pdf = outputdir + "/" + outfileName
 	pdf = pdf.replace(".tex", ".pdf")
-	cmd = ["cp", pdf, uname + "-" + shortTitle + ".pdf"]
+	cmd = ["cp", pdf, getPdfName()]
 	subprocess.call(cmd)
 
 def buildHTML(outputdir, outfileName):
@@ -178,6 +181,7 @@ def applyTemplate(genType, resume, sectionsList, templateName, shouldInsertLinks
 
 	j2Env.globals['fullName'] = fullName
 	j2Env.globals['position'] = position
+	j2Env.globals['pdfName'] = getPdfName()
 	
 	if genType == "latex":
 		sanitizer = latexSanitizer
