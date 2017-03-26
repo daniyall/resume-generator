@@ -53,12 +53,18 @@ def buildLatex(outputdir, outfileName):
 	curPath = os.getcwd()
 	os.chdir(outputdir)
 
-	tmpFName = outfileName + ".tmp"
-	with open(tmpFName, "w+") as f:
-		res = subprocess.call(["latexindent", outfileName], stdout=f)
+	try:
+		tmpFName = outfileName + ".tmp"
+		with open(tmpFName, "w+") as f:
+			res = subprocess.call(["latexindent", tmpFName], stdout=f)
 
-	if res == 0:
-		os.rename(tmpFName, outfileName)
+		if res == 0:
+			os.rename(tmpFName, outfileName)
+		else:
+			print "LatexIndent failed. Skipping"
+	except OSError:
+		print "LatexIndent not found. Skipping"
+
 
 	res = subprocess.call([latexBuildSystem, outfileName])
 	if res == 0:
