@@ -139,7 +139,8 @@ def genSections(resume, j2Env, sanitizer, sectionsList):
 
 		content = [resume[title][item] for item in resume[title]]
 		if "date" in content[0]:
-			content.sort(key=lambda x: parseDate(x["date"]), reverse=True)
+			# content.sort(key=lambda x: (getEndDate(x["date"]), getStartDate(x["date"])), reverse=True)
+			content = sorted(sorted(content, key=lambda x: getStartDate(x["date"])), key=lambda x: getEndDate(x["date"]), reverse=True)
 
 		template = j2Env.get_template(templateName)
 
@@ -214,7 +215,21 @@ def applyTemplate(genType, resume, sectionsList, templateName, shouldInsertLinks
 
 	build(outputDir, outfileName)
 
-def parseDate(dateString):
+def getStartDate(dateString):
+	endDate = getEndDate(dateString)
+
+	if "-" in dateString:
+		startDateStr = dateString.split("-")[0]
+		startDate = dateutil.parser.parse(startDateStr)
+	else:
+		startDate = dateutil.parser.parse(dateString)
+
+	if startDate.year > endDate.year:
+		startDate.replace(year=endDate.year)
+
+	return startDate
+
+def getEndDate(dateString):
 	if "present" in dateString.lower():
 		return datetime.now()
 
@@ -222,7 +237,7 @@ def parseDate(dateString):
 		endDate = dateString.split("-")[1]
 		return dateutil.parser.parse(endDate)
 
-	return dateutil.parser.parse(dateString) 
+	return dateutil.parser.parse(dateString)
 
 def applyOutline(outline, resume):
 	filteredResume = {}
