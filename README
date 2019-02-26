@@ -4,7 +4,7 @@ For first time running:
     install virtualenv
         sudo pip install virtualenv
 
-    create virtual environment
+    create virtual environment (may need to specify python2.7 with -p)
         virtualenv .venv
 
 
