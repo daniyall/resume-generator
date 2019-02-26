@@ -5,6 +5,7 @@ import sys
 import os
 import os.path
 import subprocess
+import re
 
 from datetime import datetime
 import dateutil.parser
@@ -29,6 +30,8 @@ position = ""
 uname = ""
 
 latexBuildSystem = "xelatex"
+
+now = datetime.now()
 
 def latexSanitizer(value):
 	cleanedValue = value
@@ -94,9 +97,10 @@ def writeFile(fname, data):
 			f.write(data)
 
 def htmlPrettify(html):
-	soup = bs(html)
+	# soup = bs(html)
 
-	return soup.prettify()
+	# return soup.prettify()
+	return html
 
 def latexPrettify(latex):
 	return latex
@@ -129,6 +133,32 @@ def insertLinks(generated, j2Env):
 
 	return generated
 
+def since_epoch(d):
+	return (d - datetime(1970,1,1)).total_seconds()
+
+def sort_key(content):
+	if isinstance(content, list):
+		return 0
+		
+	if "priority" in content:
+		key1, key2 = (content["priority"], content["title"])
+	elif "date" in content:
+		key2 = since_epoch(getStartDate(content["date"]))
+		key1 = since_epoch(getEndDate(content["date"]))
+	else:
+		print(content)
+		key1 = content["title"]
+		key2 = key1
+
+	return (key1, key2)
+
+def replace_bold(inpt, j2Env):
+	output = inpt
+	bolden = re.findall("(\*\*.*\*\*)", inpt)
+	if bolden:
+		for b in bolden:
+			output = bold(output, b, j2Env).replace(b, b.replace("*", "")).replace("\n", "")
+	return output
 
 def genSections(resume, j2Env, sanitizer, sectionsList):
 	generated = []
@@ -138,9 +168,7 @@ def genSections(resume, j2Env, sanitizer, sectionsList):
 		templateName = section[1]
 
 		content = [resume[title][item] for item in resume[title]]
-		if "date" in content[0]:
-			# content.sort(key=lambda x: (getEndDate(x["date"]), getStartDate(x["date"])), reverse=True)
-			content = sorted(sorted(content, key=lambda x: getStartDate(x["date"])), key=lambda x: getEndDate(x["date"]), reverse=True)
+		content = sorted(content, key=sort_key, reverse=True)
 
 		template = j2Env.get_template(templateName)
 
@@ -148,6 +176,7 @@ def genSections(resume, j2Env, sanitizer, sectionsList):
 			if isinstance(item, list):
 				for i in range(len(item)):
 					item[i] = sanitizer(item[i])
+					item[i] = replace_bold(item[i], j2Env)
 			elif isinstance(item, dict):
 				for key in item:
 					if key == "links":
@@ -156,8 +185,10 @@ def genSections(resume, j2Env, sanitizer, sectionsList):
 					elif isinstance(item[key], dict):
 						for i in range(len(item[key])):
 							item[key][i] = sanitizer(item[key][i])
+							item[key][i] = replace_bold(item[key][i], j2Env)
 					elif isinstance(item[key], basestring):
 						item[key] = sanitizer(item[key])
+						item[key] = replace_bold(item[key], j2Env)
 
 		genSection = template.render(title=title, content=content)
 		genSection = bold(genSection, fullName, j2Env)
@@ -181,6 +212,8 @@ def applyTemplate(genType, resume, sectionsList, templateName, shouldInsertLinks
 	outputDir = os.path.join(outputDirBase, templateName)
 
 	j2Env = Environment(loader=FileSystemLoader(templateDir))
+	j2Env.trim_blocks = True
+	j2Env.lstrip_blocks = True
 
 	fullName = resume["info"]["firstName"] + " " + resume["info"]["lastName"];
 	uname = resume["info"]["firstName"][0] + resume["info"]["lastName"];
@@ -231,7 +264,7 @@ def getStartDate(dateString):
 
 def getEndDate(dateString):
 	if "present" in dateString.lower():
-		return datetime.now()
+		return now
 
 	if "-" in dateString:
 		endDate = dateString.split("-")[1]
